@@ -4,6 +4,10 @@ const { REST, Routes, ApplicationCommandOptionType} = require('discord.js');
 
 const commands = [ //Array of commands
     {
+        name: 'embed',
+        description: 'Creates an embed'
+    },
+    {
         name: 'ping',
         description: 'Pong!', //Simple command
     },
