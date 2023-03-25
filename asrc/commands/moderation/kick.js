@@ -2,26 +2,26 @@ const { Client, Interaction, ApplicationCommandOptionType, PermissionFlagsBits }
 
 module.exports = {
     //deleted: true,
-    name: 'ban',
-    description: 'Bans a member from the server',
+    name: 'kick',
+    description: 'Kicks a member from the server',
     // devOnly: Boolean,
     // testOnly: Boolean,
     options: Object[
         {
             name: 'target-user',
-            description: 'The member to ban',
+            description: 'The member to kick',
             required: true,
             type: ApplicationCommandOptionType.Mentionable,
         }, 
         {
             name: 'reason',
-            description: 'The reason the member was banned',
+            description: 'The reason the member was kicked',
             required: false,
             type: ApplicationCommandOptionType.String,
         }
     ],
-    permissionsRequired: [PermissionFlagsBits.Administrator],
-    botPermissions: [PermissionFlagsBits.Administrator],
+    permissionsRequired: [PermissionFlagsBits.KickMembers],
+    botPermissions: [PermissionFlagsBits.KickMembers],
 
     /**
      * @param {Client} client 
@@ -29,8 +29,8 @@ module.exports = {
      */
 
     callback: async (client, interaction) => {
-        const targetUserID = interaction.options.get('target-user'); //Get the user to ban
-        const reason = interaction.options.get('reason')?.value || "No reason provided"; //Get reason for ban if there is one
+        const targetUserID = interaction.options.get('target-user'); //Get the user to kick
+        const reason = interaction.options.get('reason')?.value || "No reason provided"; //Get reason for kick if there is one
 
         await interaction.deferReply();
 
@@ -41,8 +41,8 @@ module.exports = {
             return;
         }
 
-        if (targetUser.id === interaction.guild.ownerId) { //Check if someones trying to ban server owner
-            await interaction.editReply('You cannot ban the server owner LMAO');
+        if (targetUser.id === interaction.guild.ownerId) { //Check if someones trying to kick server owner
+            await interaction.editReply('You cannot kick the server owner LMAO');
             return;
         }
 
@@ -51,21 +51,21 @@ module.exports = {
         const botRolePosition = interaction.guild.members.me.roles.highest.position; //Highest role of bot
 
         if (targetUserRolePosition >= requestUserRolePosition) {
-            await interaction.editReply('You cannot ban that user since they are a higher role than you!');
+            await interaction.editReply('You cannot kick that user since they are a higher role than you!');
             return;
         }
 
         if (targetUserRolePosition >= botRolePosition) {
-            await interaction.editReply('I cannot ban that user because they have a higher role than me!');
+            await interaction.editReply('I cannot kick that user because they have a higher role than me!');
             return;
         }
 
-        //Ban user
+        //Kick user
         try {
-            await targetUser.ban({reason});
-            await interaction.editReply(`User ${targetUser} was banned. Reason: ${reason}`);
+            await targetUser.kick(reason);
+            await interaction.editReply(`User ${targetUser} was kicked. Reason: ${reason}`);
         } catch (err) {
-            console.log(`There was an error banning this user: ${err}`);
+            console.log(`There was an error kicking this user: ${err}`);
         }
     }
 };
