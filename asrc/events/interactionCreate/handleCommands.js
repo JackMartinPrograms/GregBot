@@ -71,6 +71,6 @@ module.exports = async (client, interaction) => { //Handle command logic
         
         await commandObject.callback(client, interaction);
     } catch (err) {
-        console.log(`There was an error running this command: ${error}`);
+        console.log(`There was an error running this command: ${err}`);
     }
 };

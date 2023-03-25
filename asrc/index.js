@@ -1,7 +1,8 @@
 //libs lol
 require('dotenv').config();
-const { Client, IntentsBitField, ActivityType, EmbedBuilder, AttachmentBuilder } = require('discord.js');
+const { Client, IntentsBitField } = require('discord.js');
 const eventHandler = require('./handlers/eventHandler');
+const mongoose = require('mongoose');
 
 const client = new Client({ //bot client instance along w intents for it to use
     intents: [
@@ -11,6 +12,15 @@ const client = new Client({ //bot client instance along w intents for it to use
         IntentsBitField.Flags.MessageContent, //Server message content 
     ],
 });
+
+(async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.log(`There was an error while connecting to MongoDB: ${error}`);
+    }
+})();
 
 eventHandler(client); //Register event handler
 
