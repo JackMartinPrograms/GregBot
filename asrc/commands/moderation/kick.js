@@ -64,6 +64,7 @@ module.exports = {
         try {
             await targetUser.kick(reason);
             await interaction.editReply(`User ${targetUser} was kicked. Reason: ${reason}`);
+            await client.users.send(`${targetUser.id}`, 'You were kicked from Zenergy discord for: ' + `${reason}`); //Message them the reason for kick
         } catch (err) {
             console.log(`There was an error kicking this user: ${err}`);
         }

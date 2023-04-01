@@ -64,6 +64,7 @@ module.exports = {
         try {
             await targetUser.ban({reason});
             await interaction.editReply(`User ${targetUser} was banned. Reason: ${reason}`);
+            await client.users.send(`${targetUser.id}`, 'You were banned from Zenergy discord for: ' + `${reason}`); //Message them the reason for ban
         } catch (err) {
             console.log(`There was an error banning this user: ${err}`);
         }
