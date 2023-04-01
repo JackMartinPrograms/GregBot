@@ -13,16 +13,32 @@ module.exports = async (client) => {
             return false;
         }
 
+        //VOTING CHANNEL REACTIONS
+        if (message.channel.id === '1091837613838712985') {
+            message.react('👍');
+            message.react('👎');
+            return;
+        } else {
+            return;
+        }
+
         //MODERATION
         //add bad word filter
+        
+        if (message.mentions.members.first() === message.guild.members.cache.get('922467547935289344')) { //Nobody can mention me
+            message.delete();
+            return;
+        }
 
         //GENERAL STUFF / FUN THINGS
         if (includes('skill issue')) {
             message.reply('https://tenor.com/view/skill-issue-gif-19411985');
+            return;
         }
 
         if (includes('zenergy') && includes('ign')) {
-            message.channel.send(`You can find Zenergys IGN here: <#1088532435169447997>`);
+            message.reply(`You can find Zenergys IGN here: <#1088532435169447997>`);
+            return;
         }
 
         if (includes('ez')) { //Funny hypixel chat system (not possible to edit users chat so this will have to do)
@@ -51,6 +67,7 @@ module.exports = async (client) => {
             var randomNumber = Math.floor(Math.random() * replies.length);
 
             message.reply(replies[randomNumber]);
+            return;
         }
     });
 };
