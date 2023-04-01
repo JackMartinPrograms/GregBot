@@ -15,7 +15,8 @@ const client = new Client({ //bot client instance along w intents for it to use
 
 (async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        mongoose.set('strictQuery', false);
+        await mongoose.connect(process.env.MONGODB_URI, { keepAlive: true });
         console.log('Connected to MongoDB');
     } catch (error) {
         console.log(`There was an error while connecting to MongoDB: ${error}`);
