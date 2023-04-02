@@ -14,11 +14,9 @@ module.exports = async (client) => {
         }
 
         //VOTING CHANNEL REACTIONS
-        if (message.channel.id === '1091837613838712985') {
+        if (message.channel.id === process.env.VOTINGCHANNELID) {
             message.react('👍');
             message.react('👎');
-            return;
-        } else {
             return;
         }
 
@@ -26,18 +24,21 @@ module.exports = async (client) => {
         //add bad word filter
         
         if (message.mentions.members.first() === message.guild.members.cache.get('922467547935289344')) { //Nobody can mention me
+            //if they don't have staff or creator role (to add)
             message.delete();
             return;
         }
 
-        //GENERAL STUFF / FUN THINGS
-        if (includes('skill issue')) {
-            message.reply('https://tenor.com/view/skill-issue-gif-19411985');
+        //GENERAL STUFF
+        if (includes('zenergy') || includes('zenergys') || includes('zenergy\'s') && includes('ign')) {
+            message.reply(`You can find Zenergys IGN here: <#1088532435169447997>`);
             return;
         }
 
-        if (includes('zenergy') && includes('ign')) {
-            message.reply(`You can find Zenergys IGN here: <#1088532435169447997>`);
+        //FUN STUFF
+
+        if (includes('skill issue')) {
+            message.reply('https://tenor.com/view/nerd-nerdy-nerds-nerd-emoji-gif-25380417');
             return;
         }
 
