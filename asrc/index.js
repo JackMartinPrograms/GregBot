@@ -9,6 +9,7 @@ const client = new Client({ //bot client instance along w intents for it to use
         IntentsBitField.Flags.Guilds, //Server
         IntentsBitField.Flags.GuildMembers, //Server members
         IntentsBitField.Flags.GuildMessages, //Server messages
+        IntentsBitField.Flags.GuildPresences, //Guild Presences
         IntentsBitField.Flags.MessageContent, //Server message content 
     ],
 });

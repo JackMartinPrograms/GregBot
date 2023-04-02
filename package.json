@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "Greg.",
   "dependencies": {
+    "canvacord": "^5.4.8",
     "discord-youtube": "^1.1.1",
     "discord.js": "^14.8.0",
     "dotenv": "^16.0.3",
